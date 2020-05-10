@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © OpenGento, All rights reserved.
+ * See LICENSE bundled with this library for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="catalog">
+            <group id="price">
+                <field id="restrict_show_price" translate="label" type="select" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="10" canRestore="1">
+                    <label>Restrict Show Prices Mode</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                    <config_path>catalog/price/restrict_show_price</config_path>
+                </field>
+                <field id="can_show_price_groups" translate="label comment" type="multiselect" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="20">
+                    <label>Show Prices for Customer Groups</label>
+                    <comment>Not logged in users will never been able to see prices.</comment>
+                    <source_model>Magento\Customer\Model\Config\Source\Group\Multiselect</source_model>
+                    <can_be_empty>1</can_be_empty>
+                    <depends>
+                        <field id="restrict_show_price">1</field>
+                    </depends>
+                    <config_path>catalog/price/can_show_price_groups</config_path>
+                </field>
+            </group>
+        </section>
+        <section id="checkout">
+            <group id="cart">
+                <field id="restrict_saleable" translate="label" type="select" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="10" canRestore="1">
+                    <label>Restrict Sales Mode</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                    <config_path>checkout/cart/restrict_saleable</config_path>
+                </field>
+                <field id="is_saleable_groups" translate="label comment" type="multiselect" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="20">
+                    <label>Enable Sales for Customer Groups</label>
+                    <comment>Not logged in users will never been able to add to cart.</comment>
+                    <source_model>Magento\Customer\Model\Config\Source\Group\Multiselect</source_model>
+                    <can_be_empty>1</can_be_empty>
+                    <depends>
+                        <field id="restrict_saleable">1</field>
+                    </depends>
+                    <config_path>checkout/cart/is_saleable_groups</config_path>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

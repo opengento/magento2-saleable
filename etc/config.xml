@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © OpenGento, All rights reserved.
+ * See LICENSE bundled with this library for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <catalog>
+            <price>
+                <restrict_show_price>0</restrict_show_price>
+            </price>
+        </catalog>
+        <checkout>
+            <cart>
+                <restrict_saleable>0</restrict_saleable>
+            </cart>
+        </checkout>
+    </default>
+</config>

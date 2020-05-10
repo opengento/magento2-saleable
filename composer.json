@@ -1,0 +1,56 @@
+{
+    "name": "opengento/module-saleable",
+    "description": "This extension allows to set if a product is saleable and can show its price by scope and customer group.",
+    "keywords": [
+        "php",
+        "magento",
+        "magento2",
+        "saleable",
+        "pricing",
+        "customer",
+        "groups"
+    ],
+    "require": {
+        "php": "^7.1",
+        "magento/framework": "*",
+        "magento/module-catalog": "*",
+        "magento/module-checkout": "*",
+        "magento/module-config": "*",
+        "magento/module-customer": "*",
+        "magento/module-store": "*"
+    },
+    "require-dev": {
+        "magento/marketplace-eqp": "^1.0.0"
+    },
+    "type": "magento2-module",
+    "license": [
+        "MIT"
+    ],
+    "homepage": "https://github.com/opengento/magento2-saleable",
+    "authors": [
+        {
+            "name": "Opengento Team",
+            "email": "opengento@gmail.com",
+            "homepage": "https://opengento.fr/",
+            "role": "lead"
+        },
+        {
+            "name": "Thomas Klein",
+            "email": "thomaskein876@gmail.com",
+            "homepage": "https://www.linkedin.com/in/thomas-klein/",
+            "role": "maintainer"
+        }
+    ],
+    "support": {
+        "source": "https://github.com/opengento/magento2-saleable",
+        "issues": "https://github.com/opengento/magento2-saleable/issues"
+    },
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Opengento\\Saleable\\": ""
+        }
+    }
+}
