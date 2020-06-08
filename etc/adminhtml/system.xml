@@ -12,12 +12,14 @@
                 <field id="restrict_show_price" translate="label" type="select" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="10" canRestore="1">
                     <label>Restrict Show Prices Mode</label>
                     <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                    <backend_model>Opengento\Saleable\Model\Config\Backend\Cache</backend_model>
                     <config_path>catalog/price/restrict_show_price</config_path>
                 </field>
                 <field id="can_show_price_groups" translate="label comment" type="multiselect" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="20">
                     <label>Show Prices for Customer Groups</label>
                     <comment>Not logged in users will never been able to see prices.</comment>
                     <source_model>Magento\Customer\Model\Config\Source\Group\Multiselect</source_model>
+                    <backend_model>Opengento\Saleable\Model\Config\Backend\Cache</backend_model>
                     <can_be_empty>1</can_be_empty>
                     <depends>
                         <field id="restrict_show_price">1</field>

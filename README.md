@@ -57,10 +57,10 @@ The configuration for this module is available in 'Stores > Configuration > Sale
 
 ### Warning
 
-If you need to determine the rules by products, do not use this module, instead create new product attributes:
+If you need to determine the rules by products, create new product attributes:
 
-- can_show_price (boolean)
-- salable (boolean)
+- can_show_price (yes/no) The module has a plugin to enforce the type result to be a boolean.
+- salable (yes/no) The module has a plugin to enforce the type result to be a boolean.
 
 Magento will automatically handle these attributes to check if a product is saleable or its price can be displayed.
 

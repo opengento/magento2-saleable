@@ -5,9 +5,9 @@
  */
 declare(strict_types=1);
 
-namespace Opengento\Saleable\Plugin\Pricing\Renderer;
+namespace Opengento\Saleable\Plugin\Saleable;
 
-use Magento\Catalog\Model\Product\Pricing\Renderer\SalableResolverInterface;
+use Magento\Catalog\Model\Product;
 use Magento\Customer\Model\Context as CustomerContext;
 use Magento\Framework\App\Http\Context as HttpContext;
 use Opengento\Saleable\Api\CanShowPriceInterface;
@@ -32,10 +32,14 @@ final class CanShowPrice
         $this->canShowPrice = $canShowPrice;
     }
 
-    public function afterIsSalable(SalableResolverInterface $salableResolver, bool $isSalable): bool
+    public function afterGetData(Product $product, $result, $key = '')
     {
-        return $isSalable
-            ? $this->canShowPrice->canShowPrice((int) $this->httpContext->getValue(CustomerContext::CONTEXT_GROUP))
-            : false;
+        if ($key === 'can_show_price') {
+            return (bool) ($result ?? true)
+                ? $this->canShowPrice->canShowPrice((int) $this->httpContext->getValue(CustomerContext::CONTEXT_GROUP))
+                : false;
+        }
+
+        return $result;
     }
 }

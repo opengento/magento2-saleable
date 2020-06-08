@@ -9,7 +9,6 @@ namespace Opengento\Saleable\Model;
 
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Store\Model\ScopeInterface;
-use Opengento\Saleable\Api\CanShowPriceInterface;
 use Opengento\Saleable\Api\IsSaleableInterface;
 use function array_filter;
 use function array_map;
@@ -27,11 +26,6 @@ final class IsSaleable implements IsSaleableInterface
     private $scopeConfig;
 
     /**
-     * @var CanShowPriceInterface
-     */
-    private $canShowPrice;
-
-    /**
      * @var array|null
      */
     private $allowedGroups;
@@ -42,17 +36,14 @@ final class IsSaleable implements IsSaleableInterface
     private $isEnabled;
 
     public function __construct(
-        ScopeConfigInterface $scopeConfig,
-        CanShowPriceInterface $canShowPrice
+        ScopeConfigInterface $scopeConfig
     ) {
         $this->scopeConfig = $scopeConfig;
-        $this->canShowPrice = $canShowPrice;
     }
 
     public function isSaleable(int $customerGroupId): bool
     {
-        return $this->canShowPrice->canShowPrice($customerGroupId)
-            && (!$this->isEnabled() || in_array($customerGroupId, $this->resolveAllowedGroups(), true));
+        return (!$this->isEnabled() || in_array($customerGroupId, $this->resolveAllowedGroups(), true));
     }
 
     private function isEnabled(): bool

@@ -9,9 +9,9 @@
     <preference for="Opengento\Saleable\Api\CanShowPriceInterface" type="Opengento\Saleable\Model\CanShowPrice"/>
     <preference for="Opengento\Saleable\Api\IsSaleableInterface" type="Opengento\Saleable\Model\IsSaleable"/>
     <type name="Magento\Framework\Pricing\SaleableInterface">
-        <plugin name="Opengento_Saleable::canShowPrice" type="Opengento\Saleable\Plugin\Pricing\CanShowPrice" sortOrder="10"/>
+        <plugin name="Opengento_Saleable::isSaleable" type="Opengento\Saleable\Plugin\Pricing\CanShowPrice" sortOrder="10"/>
     </type>
-    <type name="Magento\Catalog\Model\Product\Pricing\Renderer\SalableResolverInterface">
-        <plugin name="Opengento_Saleable::isSaleable" type="Opengento\Saleable\Plugin\Pricing\Renderer\CanShowPrice" sortOrder="10"/>
+    <type name="Magento\Catalog\Model\Product">
+        <plugin name="Opengento_Saleable::getCanShowPrice" type="Opengento\Saleable\Plugin\Saleable\CanShowPrice" sortOrder="10"/>
     </type>
 </config>

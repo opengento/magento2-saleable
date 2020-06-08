@@ -36,12 +36,13 @@ final class IsSaleable implements ObserverInterface
 
     public function execute(Observer $observer): void
     {
+        $product = $observer->getData('product');
         $saleable = $observer->getData('salable');
 
-        if ($saleable instanceof DataObject) {
+        if ($product instanceof DataObject && $saleable instanceof DataObject) {
             $saleable->setData(
                 'is_salable',
-                (bool) $saleable->getData('is_salable')
+                ($saleable->getData('is_salable') && $product->getData('can_show_price'))
                     ? $this->isSaleable->isSaleable((int) $this->httpContext->getValue(CustomerContext::CONTEXT_GROUP))
                     : false
             );
