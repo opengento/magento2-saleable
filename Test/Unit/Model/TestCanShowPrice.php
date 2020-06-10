@@ -24,7 +24,7 @@ final class TestCanShowPrice extends TestCase
      */
     private $canShowPrice;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->scopeConfig = $this->getMockForAbstractClass(ScopeConfigInterface::class);
 

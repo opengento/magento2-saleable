@@ -35,9 +35,11 @@ final class CanShowPrice
     public function afterGetData(Product $product, $result, $key = '')
     {
         if ($key === 'can_show_price') {
-            return (bool) ($result ?? true)
-                ? $this->canShowPrice->canShowPrice((int) $this->httpContext->getValue(CustomerContext::CONTEXT_GROUP))
-                : false;
+            $groupId = $this->httpContext->getValue(CustomerContext::CONTEXT_GROUP);
+            if ($groupId !== null) {
+                $result = ($result ?? true) ? $this->canShowPrice->canShowPrice((int) $groupId) : false;
+            }
+            $result = $result ? '1' : false;
         }
 
         return $result;
