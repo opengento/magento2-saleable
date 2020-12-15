@@ -20,7 +20,9 @@
         "magento/module-store": "*"
     },
     "require-dev": {
-        "magento/marketplace-eqp": "^1.0.0"
+        "magento/magento-coding-standard": "^5",
+        "magento/marketplace-eqp": "^4.0",
+        "roave/security-advisories": "dev-master"
     },
     "type": "magento2-module",
     "license": [
