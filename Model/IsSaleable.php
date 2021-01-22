@@ -20,25 +20,18 @@ final class IsSaleable implements IsSaleableInterface
     private const CONFIG_PATH_RESTRICT_SALEABLE = 'checkout/cart/restrict_saleable';
     private const CONFIG_PATH_IS_SALEABLE_GROUPS = 'checkout/cart/is_saleable_groups';
 
-    /**
-     * @var ScopeConfigInterface
-     */
-    private $scopeConfig;
+    private ScopeConfigInterface $scopeConfig;
 
-    /**
-     * @var array|null
-     */
-    private $allowedGroups;
+    private ?array $allowedGroups;
 
-    /**
-     * @var bool|null
-     */
-    private $isEnabled;
+    private ?bool $isEnabled;
 
     public function __construct(
         ScopeConfigInterface $scopeConfig
     ) {
         $this->scopeConfig = $scopeConfig;
+        $this->allowedGroups = null;
+        $this->isEnabled = null;
     }
 
     public function isSaleable(int $customerGroupId): bool

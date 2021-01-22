@@ -14,15 +14,9 @@ use Opengento\Saleable\Api\CanShowPriceInterface;
 
 final class CanShowPrice
 {
-    /**
-     * @var HttpContext
-     */
-    private $httpContext;
+    private HttpContext $httpContext;
 
-    /**
-     * @var CanShowPriceInterface
-     */
-    private $canShowPrice;
+    private CanShowPriceInterface $canShowPrice;
 
     public function __construct(
         HttpContext $httpContext,

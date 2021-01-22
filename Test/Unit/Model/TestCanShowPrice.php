@@ -19,10 +19,7 @@ final class TestCanShowPrice extends TestCase
      */
     private $scopeConfig;
 
-    /**
-     * @var CanShowPrice
-     */
-    private $canShowPrice;
+    private CanShowPrice $canShowPrice;
 
     protected function setUp(): void
     {

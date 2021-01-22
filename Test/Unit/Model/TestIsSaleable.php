@@ -19,10 +19,7 @@ final class TestIsSaleable extends TestCase
      */
     private $scopeConfig;
 
-    /**
-     * @var IsSaleable
-     */
-    private $isSaleable;
+    private IsSaleable $isSaleable;
 
     protected function setUp(): void
     {

@@ -16,15 +16,9 @@ use Opengento\Saleable\Api\IsSaleableInterface;
 
 final class IsSaleable implements ObserverInterface
 {
-    /**
-     * @var HttpContext
-     */
-    private $httpContext;
+    private HttpContext $httpContext;
 
-    /**
-     * @var IsSaleableInterface
-     */
-    private $isSaleable;
+    private IsSaleableInterface $isSaleable;
 
     public function __construct(
         HttpContext $httpContext,
