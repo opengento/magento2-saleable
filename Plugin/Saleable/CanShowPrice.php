@@ -11,6 +11,7 @@ use Magento\Catalog\Model\Product;
 use Magento\Customer\Model\Context as CustomerContext;
 use Magento\Framework\App\Http\Context as HttpContext;
 use Opengento\Saleable\Api\CanShowPriceInterface;
+use function var_dump;
 
 final class CanShowPrice
 {
@@ -29,13 +30,18 @@ final class CanShowPrice
     public function afterGetData(Product $product, $result, $key = null)
     {
         if ($key === 'can_show_price') {
-            $groupId = $this->httpContext->getValue(CustomerContext::CONTEXT_GROUP);
-            if ($groupId !== null) {
-                $result = ($result ?? true) ? $this->canShowPrice->canShowPrice((int) $groupId) : false;
-            }
-            $result = $result ? '1' : false;
+            $result = $this->canShowPrice((bool) $result);
+        } elseif ($key === null && isset($result['can_show_price'])) {
+            $result['can_show_price'] = $this->canShowPrice((bool) $result['can_show_price']);
         }
 
         return $result;
+    }
+
+    private function canShowPrice(bool $canShowPrice): bool
+    {
+        $groupId = $this->httpContext->getValue(CustomerContext::CONTEXT_GROUP);
+
+        return $canShowPrice && $groupId !== null  ? $this->canShowPrice->canShowPrice((int) $groupId) : $canShowPrice;
     }
 }
