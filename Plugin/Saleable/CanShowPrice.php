@@ -26,7 +26,7 @@ final class CanShowPrice
         $this->canShowPrice = $canShowPrice;
     }
 
-    public function afterGetData(Product $product, $result, $key = '')
+    public function afterGetData(Product $product, $result, $key = null)
     {
         if ($key === 'can_show_price') {
             $groupId = $this->httpContext->getValue(CustomerContext::CONTEXT_GROUP);

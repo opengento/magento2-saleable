@@ -41,7 +41,7 @@ final class CanShowPrice implements CanShowPriceInterface
 
     private function isEnabled(): bool
     {
-        return $this->isEnabled ?? $this->isEnabled = $this->scopeConfig->isSetFlag(
+        return $this->isEnabled ??= $this->scopeConfig->isSetFlag(
             self::CONFIG_PATH_RESTRICT_SHOW_PRICE,
             ScopeInterface::SCOPE_WEBSITE
         );
@@ -49,12 +49,11 @@ final class CanShowPrice implements CanShowPriceInterface
 
     private function resolveAllowedGroups(): array
     {
-        return $this->allowedGroups
-            ?? $this->allowedGroups = array_map('\intval', array_filter(
-                explode(',', (string) $this->scopeConfig->getValue(
-                    self::CONFIG_PATH_CAN_SHOW_PRICE_GROUPS,
-                    ScopeInterface::SCOPE_WEBSITE
-                ))
-            ));
+        return $this->allowedGroups ??= array_map('\intval', array_filter(
+            explode(',', (string) $this->scopeConfig->getValue(
+                self::CONFIG_PATH_CAN_SHOW_PRICE_GROUPS,
+                ScopeInterface::SCOPE_WEBSITE
+            ))
+        ));
     }
 }

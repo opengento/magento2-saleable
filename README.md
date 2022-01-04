@@ -60,7 +60,12 @@ The configuration for this module is available in 'Stores > Configuration > Sale
 If you need to determine the rules by products, create new product attributes:
 
 - can_show_price (yes/no) The module has a plugin to enforce the type result to be a boolean.
-- salable (yes/no) The module has a plugin to enforce the type result to be a boolean.
+- is_purchasable (yes/no)
+
+Do not create the following attributes as they are already in use internally by field alias and internal flag:
+
+- is_salable
+- salable
 
 Magento will automatically handle these attributes to check if a product is saleable or its price can be displayed.
 
