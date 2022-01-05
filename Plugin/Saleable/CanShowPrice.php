@@ -11,7 +11,6 @@ use Magento\Catalog\Model\Product;
 use Magento\Customer\Model\Context as CustomerContext;
 use Magento\Framework\App\Http\Context as HttpContext;
 use Opengento\Saleable\Api\CanShowPriceInterface;
-use function var_dump;
 
 final class CanShowPrice
 {
