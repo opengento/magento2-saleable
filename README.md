@@ -20,7 +20,7 @@ This extension allows to set if a product is saleable and can show its price by 
 
 Magento 2 Open Source or Commerce edition is required.
 
-###  Composer installation
+### Composer installation
 
 Run the following composer command:
 
@@ -62,6 +62,7 @@ The configuration for this module is available in 'Stores > Configuration > Sale
 
 Do not create the following attributes as they are already used internally by Magento for field alias and flag:
 
+- is_saleable
 - is_salable
 - salable
 
