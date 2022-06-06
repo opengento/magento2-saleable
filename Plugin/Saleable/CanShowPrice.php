@@ -41,6 +41,6 @@ final class CanShowPrice
     {
         return $canShowPrice
             ? $this->canShowPrice->canShowPrice((int) $this->httpContext->getValue(CustomerContext::CONTEXT_GROUP))
-            : $canShowPrice;
+            : false;
     }
 }
