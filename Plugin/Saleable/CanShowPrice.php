@@ -39,8 +39,8 @@ final class CanShowPrice
 
     private function canShowPrice(bool $canShowPrice): bool
     {
-        $groupId = $this->httpContext->getValue(CustomerContext::CONTEXT_GROUP);
-
-        return $canShowPrice && $groupId !== null  ? $this->canShowPrice->canShowPrice((int) $groupId) : $canShowPrice;
+        return $canShowPrice
+            ? $this->canShowPrice->canShowPrice((int) $this->httpContext->getValue(CustomerContext::CONTEXT_GROUP))
+            : $canShowPrice;
     }
 }
