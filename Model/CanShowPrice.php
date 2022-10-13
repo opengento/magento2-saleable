@@ -20,23 +20,15 @@ final class CanShowPrice implements CanShowPriceInterface
     private const CONFIG_PATH_RESTRICT_SHOW_PRICE = 'catalog/price/restrict_show_price';
     private const CONFIG_PATH_CAN_SHOW_PRICE_GROUPS = 'catalog/price/can_show_price_groups';
 
-    private ScopeConfigInterface $scopeConfig;
+    private ?array $allowedGroups = null;
 
-    private ?array $allowedGroups;
+    private ?bool $isEnabled = null;
 
-    private ?bool $isEnabled;
-
-    public function __construct(
-        ScopeConfigInterface $scopeConfig
-    ) {
-        $this->scopeConfig = $scopeConfig;
-        $this->allowedGroups = null;
-        $this->isEnabled = null;
-    }
+    public function __construct(private ScopeConfigInterface $scopeConfig) {}
 
     public function canShowPrice(int $customerGroupId): bool
     {
-        return $this->isEnabled() ? in_array($customerGroupId, $this->resolveAllowedGroups(), true) : true;
+        return !$this->isEnabled() || in_array($customerGroupId, $this->resolveAllowedGroups(), true);
     }
 
     private function isEnabled(): bool

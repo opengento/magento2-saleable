@@ -7,26 +7,18 @@ declare(strict_types=1);
 
 namespace Opengento\Saleable\Observer\Product;
 
-use Magento\Customer\Model\Context as CustomerContext;
-use Magento\Framework\App\Http\Context as HttpContext;
 use Magento\Framework\DataObject;
 use Magento\Framework\Event\Observer;
 use Magento\Framework\Event\ObserverInterface;
 use Opengento\Saleable\Api\IsSaleableInterface;
+use Opengento\Saleable\Model\CurrentCustomerGroupId;
 
 final class IsSaleable implements ObserverInterface
 {
-    private HttpContext $httpContext;
-
-    private IsSaleableInterface $isSaleable;
-
     public function __construct(
-        HttpContext $httpContext,
-        IsSaleableInterface $isSaleable
-    ) {
-        $this->httpContext = $httpContext;
-        $this->isSaleable = $isSaleable;
-    }
+        private IsSaleableInterface $isSaleable,
+        private CurrentCustomerGroupId $currentCustomerGroupId
+    ) {}
 
     public function execute(Observer $observer): void
     {
@@ -34,14 +26,13 @@ final class IsSaleable implements ObserverInterface
         $saleable = $observer->getData('salable');
 
         if ($product instanceof DataObject && $saleable instanceof DataObject) {
-            $isSalable = $saleable->getData('is_salable')
-                && $product->getData('can_show_price')
-                && $product->getData('is_purchasable');
-            $isSalable = $isSalable
-                ? $this->isSaleable->isSaleable((int) $this->httpContext->getValue(CustomerContext::CONTEXT_GROUP))
-                : false;
-
-            $saleable->setData('is_salable', $isSalable);
+            $saleable->setData(
+                'is_salable',
+                $saleable->getData('is_salable') &&
+                $product->getData('can_show_price') &&
+                $product->getData('is_purchasable') &&
+                $this->isSaleable->isSaleable($this->currentCustomerGroupId->get())
+            );
         }
     }
 }

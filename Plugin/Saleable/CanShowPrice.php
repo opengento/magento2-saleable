@@ -8,23 +8,15 @@ declare(strict_types=1);
 namespace Opengento\Saleable\Plugin\Saleable;
 
 use Magento\Catalog\Model\Product;
-use Magento\Customer\Model\Context as CustomerContext;
-use Magento\Framework\App\Http\Context as HttpContext;
 use Opengento\Saleable\Api\CanShowPriceInterface;
+use Opengento\Saleable\Model\CurrentCustomerGroupId;
 
 final class CanShowPrice
 {
-    private HttpContext $httpContext;
-
-    private CanShowPriceInterface $canShowPrice;
-
     public function __construct(
-        HttpContext $httpContext,
-        CanShowPriceInterface $canShowPrice
-    ) {
-        $this->httpContext = $httpContext;
-        $this->canShowPrice = $canShowPrice;
-    }
+        private CanShowPriceInterface $canShowPrice,
+        private CurrentCustomerGroupId $currentCustomerGroupId
+    ) {}
 
     public function afterGetData(Product $product, $result, $key = null)
     {
@@ -39,8 +31,6 @@ final class CanShowPrice
 
     private function canShowPrice(bool $canShowPrice): bool
     {
-        return $canShowPrice
-            ? $this->canShowPrice->canShowPrice((int) $this->httpContext->getValue(CustomerContext::CONTEXT_GROUP))
-            : false;
+        return $canShowPrice && $this->canShowPrice->canShowPrice($this->currentCustomerGroupId->get());
     }
 }

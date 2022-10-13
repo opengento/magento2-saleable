@@ -14,10 +14,7 @@ use PHPUnit\Framework\TestCase;
 
 final class TestCanShowPrice extends TestCase
 {
-    /**
-     * @var MockObject|ScopeConfigInterface
-     */
-    private $scopeConfig;
+    private MockObject|ScopeConfigInterface|ScopeConfigInterface&MockObject $scopeConfig;
 
     private CanShowPrice $canShowPrice;
 

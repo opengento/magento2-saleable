@@ -18,17 +18,10 @@ use Zend_Validate_Exception;
 
 final class ProductAttributes implements DataPatchInterface
 {
-    private ModuleDataSetupInterface $moduleDataSetup;
-
-    private EavSetupFactory $eavSetupFactory;
-
     public function __construct(
-        ModuleDataSetupInterface $moduleDataSetup,
-        EavSetupFactory $eavSetupFactory
-    ) {
-        $this->moduleDataSetup = $moduleDataSetup;
-        $this->eavSetupFactory = $eavSetupFactory;
-    }
+        private ModuleDataSetupInterface $moduleDataSetup,
+        private EavSetupFactory $eavSetupFactory
+    ) {}
 
     /**
      * @throws Zend_Validate_Exception
