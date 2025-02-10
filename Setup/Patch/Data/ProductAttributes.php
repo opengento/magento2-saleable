@@ -17,8 +17,8 @@ use Magento\Framework\DB\Sql\Expression;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Setup\ModuleDataSetupInterface;
 use Magento\Framework\Setup\Patch\DataPatchInterface;
+use Magento\Framework\Validator\ValidateException;
 use Magento\Store\Model\Store;
-use Zend_Validate_Exception;
 
 final class ProductAttributes implements DataPatchInterface
 {
@@ -39,8 +39,8 @@ final class ProductAttributes implements DataPatchInterface
     }
 
     /**
-     * @throws Zend_Validate_Exception
      * @throws LocalizedException
+     * @throws ValidateException
      */
     public function apply()
     {
@@ -55,6 +55,10 @@ final class ProductAttributes implements DataPatchInterface
         $this->moduleDataSetup->endSetup();
     }
 
+    /**
+     * @throws LocalizedException
+     * @throws ValidateException
+     */
     private function addAttributes(EavSetup $eavSetup): void
     {
         $eavSetup->addAttribute(Product::ENTITY, 'is_purchasable', [
@@ -107,7 +111,7 @@ final class ProductAttributes implements DataPatchInterface
             $this->addDefaultValue($eavSetup, $eavSetup->getAttribute(Product::ENTITY, $attributeCode));
         }
     }
-    
+
     private function addDefaultValue(EavSetup $eavSetup, array $attribute): void
     {
         $connection = $this->productResource->getConnection();
