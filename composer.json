@@ -11,7 +11,7 @@
         "groups"
     ],
     "require": {
-        "php": "^8.1",
+        "php": "^8.2",
         "magento/framework": "*",
         "magento/module-catalog": "*",
         "magento/module-checkout": "*",
@@ -20,9 +20,8 @@
         "magento/module-store": "*"
     },
     "require-dev": {
-        "magento/magento-coding-standard": "^5",
-        "magento/marketplace-eqp": "^4.0",
-        "roave/security-advisories": "dev-master"
+        "magento/magento-coding-standard": "^33",
+        "roave/security-advisories": "dev-latest"
     },
     "type": "magento2-module",
     "license": [

@@ -12,5 +12,5 @@ namespace Opengento\Saleable\Api;
  */
 interface IsSaleableInterface
 {
-    public function isSaleable(int $customerGroupId): bool;
+    public function isSaleable(int $customerGroupId, int|string|null $websiteId = null): bool;
 }

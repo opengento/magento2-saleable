@@ -7,6 +7,7 @@ declare(strict_types=1);
 
 namespace Opengento\Saleable\Observer\Product;
 
+use Magento\Catalog\Model\Product;
 use Magento\Framework\DataObject;
 use Magento\Framework\Event\Observer;
 use Magento\Framework\Event\ObserverInterface;
@@ -25,13 +26,16 @@ final class IsSaleable implements ObserverInterface
         $product = $observer->getData('product');
         $saleable = $observer->getData('salable');
 
-        if ($product instanceof DataObject && $saleable instanceof DataObject) {
+        if ($product instanceof Product && $saleable instanceof DataObject) {
             $saleable->setData(
                 'is_salable',
                 $saleable->getData('is_salable') &&
                 $product->getData('can_show_price') &&
                 $product->getData('is_purchasable') &&
-                $this->isSaleable->isSaleable($this->currentCustomerGroupId->get())
+                $this->isSaleable->isSaleable(
+                    $this->currentCustomerGroupId->get(),
+                    $product->getStore()->getWebsiteId()
+                )
             );
         }
     }

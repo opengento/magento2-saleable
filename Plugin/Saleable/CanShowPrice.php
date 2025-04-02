@@ -18,19 +18,26 @@ final class CanShowPrice
         private CurrentCustomerGroupId $currentCustomerGroupId
     ) {}
 
+    /**
+     * Plugin is necessary for \Magento\Catalog\Model\Product\Pricing\Renderer\SalableResolver::isSalable
+     * Which execute $salableItem->getCanShowPrice() !== false;
+     */
     public function afterGetData(Product $product, $result, $key = null)
     {
         if ($key === 'can_show_price') {
-            $result = $result ?? true && $this->canShowPrice();
-        } elseif ($key === null)) {
-            $result['can_show_price'] = $result['can_show_price'] ?? true && $this->canShowPrice();
+            $result = ($result ?? true) && $this->canShowPrice($product);
+        } elseif ($key === null) {
+            $result['can_show_price'] = ($result['can_show_price'] ?? true) && $this->canShowPrice($product);
         }
 
         return $result;
     }
 
-    private function canShowPrice(): bool
+    private function canShowPrice(Product $product): bool
     {
-        return $this->canShowPrice->canShowPrice($this->currentCustomerGroupId->get());
+        return $this->canShowPrice->canShowPrice(
+            $this->currentCustomerGroupId->get(),
+            $product->getStore()->getWebsiteId()
+        );
     }
 }

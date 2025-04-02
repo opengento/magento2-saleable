@@ -14,6 +14,7 @@ use function array_filter;
 use function array_map;
 use function explode;
 use function in_array;
+use function intval;
 
 final class IsSaleable implements IsSaleableInterface
 {
@@ -26,25 +27,27 @@ final class IsSaleable implements IsSaleableInterface
 
     public function __construct(private ScopeConfigInterface $scopeConfig) {}
 
-    public function isSaleable(int $customerGroupId): bool
+    public function isSaleable(int $customerGroupId, int|string|null $websiteId = null): bool
     {
-        return !$this->isEnabled() || in_array($customerGroupId, $this->resolveAllowedGroups(), true);
+        return !$this->isEnabled($websiteId) || in_array($customerGroupId, $this->resolveAllowedGroups($websiteId), true);
     }
 
-    private function isEnabled(): bool
+    private function isEnabled(int|string|null $websiteId): bool
     {
         return $this->isEnabled ??= $this->scopeConfig->isSetFlag(
             self::CONFIG_PATH_RESTRICT_SALEABLE,
-            ScopeInterface::SCOPE_WEBSITE
+            ScopeInterface::SCOPE_WEBSITE,
+            $websiteId
         );
     }
 
-    private function resolveAllowedGroups(): array
+    private function resolveAllowedGroups(int|string|null $websiteId): array
     {
-        return $this->allowedGroups ??= array_map('\intval', array_filter(
+        return $this->allowedGroups ??= array_map(intval(...), array_filter(
             explode(',', (string) $this->scopeConfig->getValue(
                 self::CONFIG_PATH_IS_SALEABLE_GROUPS,
-                ScopeInterface::SCOPE_WEBSITE
+                ScopeInterface::SCOPE_WEBSITE,
+                $websiteId
             ))
         ));
     }

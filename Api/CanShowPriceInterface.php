@@ -12,5 +12,5 @@ namespace Opengento\Saleable\Api;
  */
 interface CanShowPriceInterface
 {
-    public function canShowPrice(int $customerGroupId): bool;
+    public function canShowPrice(int $customerGroupId, int|string|null $websiteId = null): bool;
 }
