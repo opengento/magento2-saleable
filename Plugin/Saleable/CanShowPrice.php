@@ -21,16 +21,16 @@ final class CanShowPrice
     public function afterGetData(Product $product, $result, $key = null)
     {
         if ($key === 'can_show_price') {
-            $result = $this->canShowPrice((bool) $result);
-        } elseif ($key === null && isset($result['can_show_price'])) {
-            $result['can_show_price'] = $this->canShowPrice((bool) $result['can_show_price']);
+            $result = $result ?? true && $this->canShowPrice();
+        } elseif ($key === null)) {
+            $result['can_show_price'] = $result['can_show_price'] ?? true && $this->canShowPrice();
         }
 
         return $result;
     }
 
-    private function canShowPrice(bool $canShowPrice): bool
+    private function canShowPrice(): bool
     {
-        return $canShowPrice && $this->canShowPrice->canShowPrice($this->currentCustomerGroupId->get());
+        return $this->canShowPrice->canShowPrice($this->currentCustomerGroupId->get());
     }
 }
