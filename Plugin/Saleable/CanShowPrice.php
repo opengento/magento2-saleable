@@ -19,8 +19,11 @@ final class CanShowPrice
     ) {}
 
     /**
-     * Plugin is necessary for \Magento\Catalog\Model\Product\Pricing\Renderer\SalableResolver::isSalable
-     * Which execute $salableItem->getCanShowPrice() !== false;
+     * Plugin is necessary for :
+     * \Magento\Catalog\Model\Product\Pricing\Renderer\SalableResolver::isSalable
+     * \Magento\Catalog\Block\Product\Price::_toHtml
+     * Such as $salableItem->getCanShowPrice() or $this->getProduct()->getCanShowPrice()
+     * You can search for references of: ‘->getCanShowPrice()‘ (magic method from DataObject)
      */
     public function afterGetData(Product $product, $result, $key = null)
     {
