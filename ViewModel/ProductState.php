@@ -5,7 +5,7 @@
  */
 declare(strict_types=1);
 
-namespace Sev\Catalog\ViewModel;
+namespace Opengento\Saleable\ViewModel;
 
 use Magento\Catalog\Model\Product;
 use Magento\Framework\View\Element\Block\ArgumentInterface;
