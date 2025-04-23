@@ -30,8 +30,8 @@ final class IsSaleable implements ObserverInterface
             $saleable->setData(
                 'is_salable',
                 $saleable->getData('is_salable') &&
-                $product->getData('can_show_price') &&
-                $product->getData('is_purchasable') &&
+                ($product->getData('can_show_price') ?? true) &&
+                ($product->getData('is_purchasable') ?? true) &&
                 $this->isSaleable->isSaleable(
                     $this->currentCustomerGroupId->get(),
                     $product->getStore()->getWebsiteId()
